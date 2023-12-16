@@ -1,2 +1,3 @@
 # AOG-NET-360
-This is the implementation of paper ##Autoregressive Omni-Aware Outpainting for Open-Vocabulary 360-Degree Image Generation##
+This is the implementation of paper "Autoregressive Omni-Aware Outpainting for Open-Vocabulary 360-Degree Image Generation" 
+Code will be released soon
