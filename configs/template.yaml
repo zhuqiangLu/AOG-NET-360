@@ -1,0 +1,112 @@
+SHARE:
+  image_size: 512
+model:
+    target: models.InpaintModel
+    params:
+      clip_model_id: 'stabilityai/stable-diffusion-2-1-unclip'
+      sd_model_id: 'stabilityai/stable-diffusion-2-inpainting'
+      train_kv: False
+      transformer_config:
+        depth: 8
+        heads: 8
+      opt_config:
+        lr: 1e-5
+        betas:
+          - 0.9
+          - 0.999
+        
+              
+data:
+  target: dataset.DataModuleFromConfig
+  params:
+    batch_size: 1
+    num_workers: 4 
+    train:
+      target: dataset.PosImageDataset
+      params:
+        folders: 
+          - /path/to/your/dataset
+        image_width: 4096
+        image_height: 2048
+        cube_size: ${SHARE.image_size}
+        caption_info: "/path/to/caption.pkl" # path to caption
+        mask_info: "./mask.pkl"
+        augment_caption_info: "/path/to/augmented_caption.pkl"
+        num_augment_caption: 1
+        
+    validation:
+        target: dataset.PosImageDataset
+        params:
+          folders: 
+            - /path/to/your/datast
+          image_width: 4096
+          image_height: 2048
+          dataset_size: 10
+          cube_size: ${SHARE.image_size}
+          caption_info: "/path/to/caption.pkl" # path to caption
+          mask_info: "./mask.pkl"
+          augment_caption_info: "/path/to/augmented_caption.pkl"
+          num_augment_caption: 1
+        
+    test:
+        target: dataset.PosImageDataset
+        params:
+          folders: 
+            - /path/to/your/datast
+          image_width: 4096
+          image_height: 2048
+          dataset_size: 10
+          cube_size: ${SHARE.image_size}
+          caption_info: "./test_caption/laval_indoor.pkl" 
+          mask_info: "/hdd/test_mask_4096.pkl"
+          augment_caption_info: "./test_caption/laval_indoor_aug.pkl"
+          num_augment_caption: 1
+
+
+trainer: 
+  accelerator: gpu
+  devices: [0]
+  accumulate_grad_batches: 1
+  default_root_dir: /path/to/you/exp_dir #here is where you find your ckpt
+  max_epochs: -1
+  precision: 16
+  amp_backend: 'native' 
+callbacks:
+  callback_1:
+    target: pytorch_lightning.callbacks.ModelCheckpoint
+    params:
+      monitor: val/loss
+      save_top_k: 1
+      mode: min
+      filename: latest_checkpoint
+
+  callback_2:
+   target: pytorch_lightning.callbacks.ModelCheckpoint
+   params:
+      every_n_epochs: 20
+      save_on_train_epoch_end: True
+      save_top_k: -1 
+      filename: '{epoch}-{step}-10000-{train/loss:.2f}'
+
+  callback_3:
+    target: pytorch_lightning.callbacks.LearningRateMonitor
+    params:
+      logging_interval: step
+    
+  callback_4:
+   target: misc.callbacks.ImageLogger
+   params:
+      batch_frequency: 3000
+      max_images: -1
+      clamp: True
+      selected_keys:
+        - input
+        - output 
+        - masked_input 
+        - cond_equi
+        - attn
+
+          num_augment_caption: 1
+
+
+
