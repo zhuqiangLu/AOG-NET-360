@@ -71,7 +71,7 @@ You may define the inference image as a dataset in ```config/inference_config.ya
 
 ```
 # Acknowledgement
-this project is build upon (Diffusers)[https://github.com/huggingface/diffusers] and (PyEquilib)[https://github.com/haruishi43/equilib]
+this project is build upon [Diffusers](https://github.com/huggingface/diffusers) and [PyEquilib](https://github.com/haruishi43/equilib)
 
 # Reference
 [1] Gardner, M. A., Sunkavalli, K., Yumer, E., Shen, X., Gambaretto, E., Gagné, C., & Lalonde, J. F. (2017). Learning to predict indoor illumination from a single image. arXiv preprint arXiv:1704.00090.
