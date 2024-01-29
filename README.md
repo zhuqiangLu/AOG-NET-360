@@ -59,6 +59,10 @@ python inference.py -b config/inference_config.yaml --checkpoint [path to ckpt] 
 ```
 You may define the inference image as a dataset in ```config/inference_config.yaml```.
 
+# Troubleshooting
+1. ```Expected is_sm80 to be true, but got false```. Since I have left this project for a while, there may be some versioning issues. I run it on a RTX 3090 recently, I got this ```is_sm80``` error. This error is resolved by updating ```pytorch``` to the latest version.
+2. Make sure you use the modified version of ```PyEquilib```, the official one will lead to some coloring issue.
+   
 
 # Citing 
 ```
