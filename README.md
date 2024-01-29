@@ -75,5 +75,7 @@ this project is build upon [Diffusers](https://github.com/huggingface/diffusers)
 
 # Reference
 [1] Gardner, M. A., Sunkavalli, K., Yumer, E., Shen, X., Gambaretto, E., Gagné, C., & Lalonde, J. F. (2017). Learning to predict indoor illumination from a single image. arXiv preprint arXiv:1704.00090.
+
 [2] Yannick Hold-Geoffroy, Akshaya Athawale, and Jean-François Lalonde Deep Sky Modeling for Single Image Outdoor Lighting Estimation IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019.
+
 [3] Li, J., Li, D., Savarese, S., & Hoi, S. (2023). Blip-2: Bootstrapping language-image pre-training with frozen image encoders and large language models. arXiv preprint arXiv:2301.12597.
